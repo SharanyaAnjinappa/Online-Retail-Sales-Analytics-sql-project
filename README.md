@@ -1,27 +1,43 @@
 # Online-Retail-Sales-Analytics-Database-Management-System
-📌 Project Overview
-This project focuses on designing and implementing a normalized relational database for an online retail business using MySQL.
-The project uses an online retail transaction dataset obtained from Kaggle. The raw data was cleaned and transformed into a structured relational database containing customers, products, categories, orders, order items, and payments.
+
+## 📌 Project Overview
+
+This project focuses on designing and implementing a normalized relational database for an online retail business using **MySQL**.
+
+The project uses an online retail transaction dataset obtained from Kaggle. The raw data was cleaned and transformed into a structured relational database containing **customers, products, categories, orders, order items, and payments**.
+
 SQL queries were then developed to analyze sales performance, customer spending, product performance, revenue trends, and other business metrics.
-🎯 Objectives
+
+---
+
+## 🎯 Objectives
+
 - Design a normalized SQL database for an online retail business.
 - Clean and transform raw transaction data.
 - Reduce data redundancy using relational database design.
 - Implement primary keys and foreign keys.
 - Analyze sales using SQL queries.
-- Use JOINs, GROUP BY, HAVING, subqueries, CTEs, and window functions.
+- Use `JOIN`, `GROUP BY`, `HAVING`, subqueries, CTEs, and window functions.
 - Create reusable SQL views for reporting.
 - Generate meaningful business insights from retail transactions.
-🛠️ Tools & Technologies
-Tool	Purpose
-MySQL 8.0	Database management
-MySQL Workbench	SQL development and ER diagram
-SQL	Data cleaning, transformation and analysis
-Kaggle	Source dataset
 
+---
 
-📂 Dataset
+## 🛠️ Tools & Technologies
+
+| Tool / Technology | Purpose |
+|---|---|
+| MySQL 8.0 | Database management |
+| MySQL Workbench | SQL development and ER diagram |
+| SQL | Data cleaning, transformation, and analysis |
+| Kaggle | Source dataset |
+
+---
+
+## 📂 Dataset
+
 The project uses an online retail transaction dataset containing fields such as:
+
 - Invoice Number
 - Stock Code
 - Product Description
@@ -30,94 +46,143 @@ The project uses an online retail transaction dataset containing fields such as:
 - Unit Price
 - Customer ID
 - Country
-The imported data was stored initially in a staging table called retail_raw.
-🔄 Project Workflow
-Kaggle Dataset
-       ↓
-Raw Data Import
-       ↓
-Data Quality Checks
-       ↓
-Data Cleaning
-       ↓
-Database Normalization
-       ↓
-Customers
-Categories
-Products
-Orders
-Order_Items
-Payments
-       ↓
-SQL Analysis
-       ↓
-Views & Reports
 
-🧹 Data Cleaning
+The imported data was initially stored in a staging table called `retail_raw`.
+
+---
+
+## 🔄 Project Workflow
+
+```text
+Kaggle Dataset
+      ↓
+Raw Data Import
+      ↓
+Data Quality Checks
+      ↓
+Data Cleaning
+      ↓
+Database Normalization
+      ↓
+┌─────────────┐
+│  Customers  │
+│ Categories  │
+│  Products   │
+│   Orders    │
+│ Order_Items │
+│  Payments   │
+└─────────────┘
+      ↓
+SQL Analysis
+      ↓
+Views & Reports
+```
+
+---
+
+## 🧹 Data Cleaning
+
 The raw dataset was checked for:
+
 - Missing Customer IDs
 - Invalid quantities
 - Invalid prices
 - Missing product descriptions
 - Duplicate records
+
 Records with invalid quantities or prices and missing required customer/product information were removed.
-After cleaning, the project contained:
-Metric	Count
-Valid transaction rows	653
-Customers	31
-Products	416
-Orders	44
-Categories	10
 
+### Dataset Statistics
 
-🗄️ Database Design
-The database contains six main tables:
-1. Customers
+| Metric | Count |
+|---|---:|
+| Valid transaction rows | 653 |
+| Customers | 31 |
+| Products | 416 |
+| Orders | 44 |
+| Categories | 10 |
+
+---
+
+## 🗄️ Database Design
+
+The database contains six main tables.
+
+### 1. Customers
+
 Stores unique customer information.
-customer_id
-source_customer_id
-country
 
-2. Categories
+| Column | Description |
+|---|---|
+| `customer_id` | Internal customer ID |
+| `source_customer_id` | Customer ID from source dataset |
+| `country` | Customer country |
+
+### 2. Categories
+
 Stores product categories.
-category_id
-category_name
 
-3. Products
+| Column | Description |
+|---|---|
+| `category_id` | Category ID |
+| `category_name` | Category name |
+
+### 3. Products
+
 Stores product information.
-product_id
-stock_code
-product_name
-unit_price
-category_id
 
-4. Orders
+| Column | Description |
+|---|---|
+| `product_id` | Product ID |
+| `stock_code` | Product/stock code |
+| `product_name` | Product description |
+| `unit_price` | Product price |
+| `category_id` | Related category |
+
+### 4. Orders
+
 Stores individual orders/invoices.
-order_id
-invoice_no
-customer_id
-order_date
 
-5. Order_Items
+| Column | Description |
+|---|---|
+| `order_id` | Order ID |
+| `invoice_no` | Invoice number |
+| `customer_id` | Related customer |
+| `order_date` | Order date and time |
+
+### 5. Order_Items
+
 Stores the products purchased in each order.
-order_item_id
-order_id
-product_id
-quantity
-unit_price
 
-6. Payments
+| Column | Description |
+|---|---|
+| `order_item_id` | Order item ID |
+| `order_id` | Related order |
+| `product_id` | Related product |
+| `quantity` | Quantity purchased |
+| `unit_price` | Transaction price |
+
+### 6. Payments
+
 Stores payment information associated with orders.
-payment_id
-order_id
-payment_method
-payment_status
-payment_amount
 
-Note: Payment information was not available in the original dataset. Payment attributes were generated as synthetic project data to complete the e-commerce database model.
+| Column | Description |
+|---|---|
+| `payment_id` | Payment ID |
+| `order_id` | Related order |
+| `payment_method` | Payment method |
+| `payment_status` | Payment status |
+| `payment_amount` | Payment amount |
 
-🔗 ER Diagram
+> **Note:** Payment information was not available in the original dataset. Payment attributes were generated as synthetic project data to complete the e-commerce database model.
+
+---
+
+## 🔗 ER Diagram
+
 The database relationships are:
+
+```text
 Customers
     │
     │ 1 : Many
@@ -135,50 +200,78 @@ Order_Items
     │ Many : 1
     ▼
 Categories
+```
 
-ER Diagram
-<img width="891" height="469" alt="ER_diagram_for online_retail" src="https://github.com/user-attachments/assets/754652e5-e508-489f-ad74-28b13fa40402" />
+### ER Diagram
 
-📈 SQL Analysis
-The project includes SQL queries for:
-Sales Analysis
+![ER Diagram](diagrams/ER_Diagram.png)
+
+---
+
+## 📈 SQL Analysis
+
+The project includes SQL queries for different business analysis tasks.
+
+### 💰 Sales Analysis
+
 - Total revenue
 - Revenue by country
 - Monthly revenue
 - Revenue by category
-Product Analysis
+- Average order value
+
+### 📦 Product Analysis
+
 - Top 10 products by revenue
 - Top products by quantity sold
 - Products above average price
 - Product performance
-Customer Analysis
+
+### 👥 Customer Analysis
+
 - Top customers by spending
 - Customers with multiple orders
 - Customer spending rankings
-- Average order value
-Advanced SQL
+- Repeat customers
+
+### 🧠 Advanced SQL
+
 The project demonstrates:
-- INNER JOIN
-- LEFT JOIN
-- GROUP BY
-- HAVING
+
+- `INNER JOIN`
+- `LEFT JOIN`
+- `GROUP BY`
+- `HAVING`
 - Aggregate functions
 - Subqueries
 - CTEs
 - Window functions
-- RANK()
+- `RANK()`
 - Date functions
 - SQL Views
-🔍 Example SQL Query
-Total Revenue
--- Calculate total revenue from all order items.
+
+---
+
+## 🔍 Example SQL Queries
+
+### Total Revenue
+
+Calculates the total revenue generated from all order items.
+
+```sql
+-- Calculate total revenue.
 -- Revenue = Quantity × Unit Price
 
 SELECT
     SUM(quantity * unit_price) AS total_revenue
 FROM order_items;
+```
 
-Top 10 Products by Revenue
+### Top 10 Products by Revenue
+
+Calculates the revenue generated by each product and displays the top 10 products.
+
+```sql
 -- Calculate revenue for every product
 -- and display the top 10 products.
 
@@ -193,17 +286,49 @@ GROUP BY
     p.product_name
 ORDER BY total_revenue DESC
 LIMIT 10;
+```
 
-👁️ SQL Views
+### Top Customers by Spending
+
+```sql
+-- Calculate the total amount spent by each customer.
+
+SELECT
+    c.source_customer_id,
+    c.country,
+    SUM(oi.quantity * oi.unit_price) AS total_spent
+FROM customers c
+JOIN orders o
+    ON c.customer_id = o.customer_id
+JOIN order_items oi
+    ON o.order_id = oi.order_id
+GROUP BY
+    c.customer_id,
+    c.source_customer_id,
+    c.country
+ORDER BY total_spent DESC
+LIMIT 10;
+```
+
+---
+
+## 👁️ SQL Views
+
 The project contains reusable views for reporting:
-sales_summary
-customer_sales_summary
-monthly_sales
-product_performance
 
-These views make frequently required reports easier to query.
-📊 Key Project Insights
+- `sales_summary`
+- `customer_sales_summary`
+- `monthly_sales`
+- `product_performance`
+
+These views make frequently required reports easier to query and reuse.
+
+---
+
+## 📊 Key Project Insights
+
 The SQL analysis can be used to identify:
+
 - Products generating the highest revenue.
 - Products with the highest number of units sold.
 - Customers contributing the most revenue.
@@ -212,8 +337,12 @@ The SQL analysis can be used to identify:
 - Category-level revenue performance.
 - Repeat customers.
 - Products priced above the overall average.
-📁 Project Structure
-I recommend arranging your GitHub repository like this:
+
+---
+
+## 📁 Project Structure
+
+```text
 online-retail-sales-sql-project/
 │
 ├── README.md
@@ -234,21 +363,48 @@ online-retail-sales-sql-project/
 │
 ├── reports/
 │   └── Online_Retail_Sales_Analytics_Project_Report.pdf
+│
+└── screenshots/
+    ├── database_tables.png
+    ├── sales_analysis.png
+    └── er_diagram.png
+```
 
+---
 
-⚠️ Don't upload the raw CSV if it contains unnecessary personal/customer information.
-For this project, you can simply put a README.md inside data/ saying:
-# Dataset
+## 📂 Dataset Files
+
+The raw CSV dataset is not included in this repository.
 
 The project uses an online retail transaction dataset obtained from Kaggle.
 
-The raw dataset is not included in this repository. The SQL scripts operate on the cleaned project data imported during development.
+The SQL scripts operate on the cleaned project data imported during development.
 
-🎓 Conclusion
+---
+
+## 🎓 Conclusion
+
 This project demonstrates the complete workflow of transforming raw retail transaction data into a normalized relational database and performing SQL-based business analysis.
-The project provided practical experience in database design, data cleaning, normalization, relational modeling, SQL analytics, CTEs, window functions, and reporting views.
 
+The project provided practical experience in:
 
-👩‍💻 Author
-Sharanya A
+- Database design
+- Data cleaning
+- Normalization
+- Relational modeling
+- SQL analytics
+- JOIN operations
+- CTEs
+- Window functions
+- SQL Views
+- Business reporting
+
+The database can be extended in the future with additional customer attributes, inventory management, real payment information, and larger transaction volumes.
+
+---
+
+## 👩‍💻 Author
+
+**Sharanya A**
+
 B.Tech – Computer Science and Engineering
