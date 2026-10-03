@@ -204,7 +204,8 @@ Categories
 
 ### ER Diagram
 
-![ER Diagram](diagrams/ER_Diagram.png)
+<img width="891" height="469" alt="ER_diagram_for online_retail" src="https://github.com/user-attachments/assets/0e222c52-ab6c-4df1-80c9-a29f91bbe764" />
+
 
 ---
 
