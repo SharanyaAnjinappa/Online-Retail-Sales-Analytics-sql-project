@@ -363,12 +363,8 @@ online-retail-sales-sql-project/
 │   └── ER_Diagram.png
 │
 ├── reports/
-│   └── Online_Retail_Sales_Analytics_Project_Report.pdf
-│
-└── screenshots/
-    ├── database_tables.png
-    ├── sales_analysis.png
-    └── er_diagram.png
+    └── Online_Retail_Sales_Analytics_Project_Report.pdf
+
 ```
 
 ---
